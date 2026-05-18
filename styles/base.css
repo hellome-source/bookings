@@ -1,0 +1,35 @@
+:root {
+  --blue: #2f7dd3;
+  --primary: #15527f;
+  --secondary: #0000ee;
+  --blue-dark: #005a92;
+  --text: #323130;
+  --heading: #242424;
+  --text-primary: #2f7dd3;
+  --muted: #6f6f6f;
+  --line: #e4e4e4;
+  --panel: #fff;
+  --page: #f3f3f3;
+  --teams: #5b5fc7;
+  --green: #107c10;
+  --radius: 6px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--page);
+  color: var(--text);
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px;
+}
+
+button,
+a {
+  font: inherit;
+}

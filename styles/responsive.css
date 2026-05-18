@@ -1,0 +1,261 @@
+@media (max-width: 720px) {
+  .topbar {
+    height: 48px;
+    padding: 0 16px;
+  }
+
+  .topbar h1 {
+    font-size: 14px;
+  }
+
+  .page-shell {
+    width: min(398px, calc(100% - 32px));
+    margin-top: 18px;
+    margin-bottom: 40px;
+  }
+
+  .profile-card {
+    width: 100%;
+    height: 156px;
+  }
+
+  .cover {
+    height: 96px;
+  }
+
+  .profile-body {
+    height: 60px;
+    padding-left: 20px;
+  }
+
+  .avatar {
+    width: 64px;
+    height: 64px;
+    margin-top: -30px;
+  }
+
+  .profile-copy {
+    margin-left: 18px;
+  }
+
+  .profile-copy h2 {
+    font-size: 18px;
+  }
+
+  .profile-copy a {
+    font-size: 15px;
+  }
+
+  .booking-panel {
+    padding: 18px 16px 42px;
+    height: auto;
+    min-height: 0;
+  }
+
+  .meeting-section h2 {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .meeting-card {
+    width: min(366px, 100%);
+    height: 220px;
+    justify-content: flex-start;
+    padding: 18px 18px;
+  }
+
+  .meeting-title-row {
+    width: 100%;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 2px;
+    margin-left: 0;
+  }
+
+  .meeting-icon {
+    width: 17px;
+    height: 17px;
+    margin-top: 1px;
+  }
+
+  .meeting-copy {
+    width: 100%;
+  }
+
+  .meeting-title-row strong {
+    max-width: none;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .timezone,
+  .weekdays,
+  .dates button,
+  .today {
+    font-size: 19px;
+  }
+
+  .role {
+    margin-top: 5px;
+    margin-left: 30px;
+    font-size: 12px;
+    font-weight: 300;
+  }
+
+  .meta {
+    min-height: 27px;
+    margin-top: 12px;
+    padding: 5px 10px;
+    width: 100%;
+    gap: 8px;
+    font-size: 13px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+
+  .teams img {
+    width: 13px;
+    height: 13px;
+  }
+
+  .description {
+    margin-top: 12px;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  .availability-head {
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  .availability-head h2 {
+    font-size: 16px;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  .timezone {
+    width: 236px;
+    flex: 0 0 236px;
+    min-width: 0;
+    height: 31px;
+    font-size: 15px;
+    justify-content: flex-start;
+  }
+
+  .availability-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .calendar,
+  .times {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .calendar {
+    height: auto;
+  }
+
+  .time-list {
+    width: 100%;
+    max-width: 100%;
+    height: 340px;
+    gap: 8px;
+  }
+
+  .weekdays,
+  .dates {
+    grid-template-columns: repeat(7, 28px);
+    justify-content: space-between;
+    column-gap: 0;
+  }
+
+  .calendar h3,
+  .times h3 {
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .weekdays {
+    font-size: 13px;
+  }
+
+  .dates button {
+    width: 34px;
+    height: 34px;
+    font-size: 13px;
+  }
+
+  .today {
+    display: block;
+    margin-top: 16px;
+    font-size: 13px;
+  }
+
+  .times h3 {
+    margin-bottom: 12px;
+  }
+
+  .time-slot {
+    width: calc(100% - 10px);
+    min-height: 46px;
+    flex: 0 0 46px;
+    height: 46px;
+    padding: 0 18px;
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  .check-icon {
+    width: 19px;
+    height: 19px;
+    flex-basis: 19px;
+    margin-right: 8px;
+  }
+
+  .admin-shell {
+    width: calc(100% - 24px);
+    margin-top: 24px;
+  }
+
+  .admin-panel {
+    padding: 20px;
+  }
+
+  .admin-heading,
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-heading {
+    display: grid;
+  }
+
+  .popup-backdrop {
+    padding: 64px 16px 24px;
+  }
+
+  .signin-card {
+    width: min(440px, 100%);
+  }
+
+  .link-inline-panel {
+    width: min(398px, calc(100% - 32px));
+    height: min(460px, 62vh);
+  }
+
+  .link-panel-layer {
+    top: 58px;
+    width: 100%;
+  }
+}
