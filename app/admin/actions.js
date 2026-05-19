@@ -2,14 +2,6 @@
 
 import { cookies } from "next/headers";
 
-async function hashToken(password) {
-  const encoder = new TextEncoder();
-  const data = encoder.encode(password);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
-}
-
 export async function login(formData) {
   const password = formData.get("password");
   const adminPassword = process.env.ADMIN_PASSWORD;
@@ -22,13 +14,12 @@ export async function login(formData) {
     return { error: "Incorrect password." };
   }
 
-  const token = await hashToken(adminPassword);
   const cookieStore = await cookies();
-  cookieStore.set("admin_token", token, {
+  cookieStore.set("admin_token", "1", {
     httpOnly: true,
     secure: true,
     sameSite: "lax",
-    path: "/admin",
+    path: "/",
   });
 
   return { success: true };
