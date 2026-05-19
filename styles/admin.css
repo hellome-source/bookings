@@ -213,3 +213,18 @@
   font-size: 12px;
   line-height: 1.35;
 }
+
+.admin-login-form {
+  max-width: 360px;
+  padding-top: 24px;
+}
+
+.admin-login-form input {
+  width: 100%;
+}
+
+.admin-login-error {
+  margin: 0;
+  color: #d32f2f;
+  font-size: 13px;
+}
