@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { buildSupabaseShareUrl, createBookingProfile } from "../../lib/supabase";
 import { defaultProfile, buildShareUrl, readProfileSettings, settingsKey, writeProfileSettings } from "../../lib/settings";
+import { logout } from "./actions";
 
 export default function AdminPage() {
   const [settings, setSettings] = useState(defaultProfile);
@@ -104,7 +105,12 @@ export default function AdminPage() {
               <h1>Booking Page Settings</h1>
               <p>Edit the public profile content shown on the booking page.</p>
             </div>
-            <a href="/" className="admin-link">View page</a>
+            <div style={{ display: "flex", gap: "12px", alignItems: "center" }}>
+              <a href="/" className="admin-link">View page</a>
+              <form action={logout} style={{ margin: 0 }}>
+                <button className="admin-link" style={{ border: 0, background: "none", cursor: "pointer", padding: 0, textDecoration: "underline" }}>Sign out</button>
+              </form>
+            </div>
           </div>
 
           <div className="admin-grid">

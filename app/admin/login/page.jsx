@@ -1,10 +1,19 @@
 "use client";
 
+import { useEffect } from "react";
 import { useActionState } from "react";
+import { useRouter } from "next/navigation";
 import { login } from "../actions";
 
 export default function AdminLoginPage() {
+  const router = useRouter();
   const [state, formAction, pending] = useActionState(login, null);
+
+  useEffect(() => {
+    if (state?.success) {
+      router.push("/admin");
+    }
+  }, [state, router]);
 
   return (
     <>

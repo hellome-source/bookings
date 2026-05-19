@@ -1,7 +1,6 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 async function hashToken(password) {
   const encoder = new TextEncoder();
@@ -32,11 +31,10 @@ export async function login(formData) {
     path: "/admin",
   });
 
-  redirect("/admin");
+  return { success: true };
 }
 
 export async function logout() {
   const cookieStore = await cookies();
   cookieStore.delete("admin_token");
-  redirect("/admin/login");
 }
