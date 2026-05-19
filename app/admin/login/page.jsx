@@ -1,19 +1,38 @@
 "use client";
 
-import { useEffect } from "react";
-import { useActionState } from "react";
-import { useRouter } from "next/navigation";
-import { login } from "../actions";
+import { useState } from "react";
 
 export default function AdminLoginPage() {
-  const router = useRouter();
-  const [state, formAction, pending] = useActionState(login, null);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (state?.success) {
-      router.push("/admin");
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setError("");
+    setLoading(true);
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        setError(data.error || "Login failed.");
+        return;
+      }
+
+      window.location.href = "/admin";
+    } catch {
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
     }
-  }, [state, router]);
+  }
 
   return (
     <>
@@ -30,7 +49,7 @@ export default function AdminLoginPage() {
             <h1>Admin Login</h1>
           </div>
 
-          <form action={formAction} className="admin-form admin-login-form">
+          <form onSubmit={handleSubmit} className="admin-form admin-login-form">
             <label>
               <span>Password</span>
               <input
@@ -38,19 +57,17 @@ export default function AdminLoginPage() {
                 name="password"
                 autoFocus
                 required
-                disabled={pending}
+                disabled={loading}
               />
             </label>
 
             <div className="admin-actions">
-              <button className="admin-save" type="submit" disabled={pending}>
-                {pending ? "Signing in..." : "Sign in"}
+              <button className="admin-save" type="submit" disabled={loading}>
+                {loading ? "Signing in..." : "Sign in"}
               </button>
             </div>
 
-            {state?.error ? (
-              <p className="admin-login-error">{state.error}</p>
-            ) : null}
+            {error ? <p className="admin-login-error">{error}</p> : null}
           </form>
         </section>
       </main>
