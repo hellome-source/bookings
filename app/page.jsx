@@ -14,16 +14,20 @@ import { buildBookingLink, defaultProfile, readProfileSettings, readShareSetting
 import { readSupabaseProfile } from "../lib/supabase";
 
 export default function Page() {
-  const [initialSelection] = useState(() => getInitialBookingSelection());
   const [profile, setProfile] = useState(defaultProfile);
-  const [selectedTime, setSelectedTime] = useState(initialSelection.time);
-  const [visibleMonth, setVisibleMonth] = useState(new Date(initialSelection.date.getFullYear(), initialSelection.date.getMonth(), 1));
-  const [selectedDateKey, setSelectedDateKey] = useState(initialSelection.dateKey);
+  const [selectedTime, setSelectedTime] = useState("");
+  const [visibleMonth, setVisibleMonth] = useState(() => {
+    const selection = getInitialBookingSelection(new Date(), defaultProfile);
+    return new Date(selection.date.getFullYear(), selection.date.getMonth(), 1);
+  });
+  const [selectedDateKey, setSelectedDateKey] = useState(() => {
+    const selection = getInitialBookingSelection(new Date(), defaultProfile);
+    return selection.dateKey;
+  });
   const [timezoneOpen, setTimezoneOpen] = useState(false);
   const [timezone, setTimezone] = useState("GMT / UTC");
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [linkPopupOpen, setLinkPopupOpen] = useState(false);
-  const [profileLoaded, setProfileLoaded] = useState(false);
 
   const selectedDate = dateFromKey(selectedDateKey);
   const availableTimes = availableTimesForDate(selectedDateKey, profile.availableDays, profile.timeRange);
@@ -36,15 +40,11 @@ export default function Page() {
       try {
         const supabaseProfile = await readSupabaseProfile();
         if (!cancelled) {
-          const loaded = supabaseProfile || readShareSettings() || readProfileSettings();
-          setProfile(loaded);
-          setProfileLoaded(true);
+          setProfile(supabaseProfile || readShareSettings() || readProfileSettings());
         }
       } catch {
         if (!cancelled) {
-          const loaded = readShareSettings() || readProfileSettings();
-          setProfile(loaded);
-          setProfileLoaded(true);
+          setProfile(readShareSettings() || readProfileSettings());
         }
       }
     }
@@ -56,14 +56,6 @@ export default function Page() {
       cancelled = true;
     };
   }, []);
-
-  useEffect(() => {
-    if (!profileLoaded) return;
-    const selection = getInitialBookingSelection(new Date(), profile);
-    setSelectedDateKey(selection.dateKey);
-    setVisibleMonth(new Date(selection.date.getFullYear(), selection.date.getMonth(), 1));
-    setSelectedTime("");
-  }, [profileLoaded]);
 
   useEffect(() => {
     if (!confirmOpen && !linkPopupOpen) return undefined;
