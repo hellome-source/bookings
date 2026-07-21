@@ -101,6 +101,63 @@
   resize: vertical;
 }
 
+.admin-form select {
+  width: 100%;
+  border: 1px solid #d1d1d1;
+  border-radius: 6px;
+  padding: 9px 10px;
+  color: var(--heading);
+  background: #fff;
+  font: inherit;
+  font-size: 13px;
+}
+
+.admin-form select:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
+  border-color: var(--blue);
+}
+
+.admin-fieldset {
+  display: grid;
+  gap: 7px;
+}
+
+.admin-fieldset > span {
+  color: #605e5c;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.admin-checkboxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+
+.admin-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.admin-checkbox input[type="checkbox"] {
+  width: auto;
+  accent-color: var(--blue);
+}
+
+.admin-checkbox span {
+  font-size: 13px;
+  color: var(--heading);
+}
+
+.admin-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
 .admin-form input:focus,
 .admin-form textarea:focus {
   outline: 2px solid var(--blue);

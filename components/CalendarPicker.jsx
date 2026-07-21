@@ -1,6 +1,6 @@
 import { buildMonth, dateToKey, isAvailableDate, isDarkDate, monthNames, today } from "../lib/booking-data";
 
-export function CalendarPicker({ visibleMonth, selectedDateKey, onMonthChange, onToday, onDateGridClick }) {
+export function CalendarPicker({ visibleMonth, selectedDateKey, onMonthChange, onToday, onDateGridClick, availableDays }) {
   const calendarDates = buildMonth(visibleMonth.getFullYear(), visibleMonth.getMonth());
 
   return (
@@ -21,7 +21,7 @@ export function CalendarPicker({ visibleMonth, selectedDateKey, onMonthChange, o
         {calendarDates.map((date, index) => {
           const isEmpty = !date;
           const isSelected = date ? dateToKey(date) === selectedDateKey : false;
-          const isAvailable = date ? isAvailableDate(date) : false;
+          const isAvailable = date ? isAvailableDate(date, availableDays) : false;
           const isDark = date ? isDarkDate(date) : false;
           const className = [
             isEmpty ? "muted empty" : "",

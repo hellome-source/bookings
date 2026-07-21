@@ -154,6 +154,47 @@ export default function AdminPage() {
                 <input placeholder="https://..." value={settings.signInUrl || ""} onChange={(event) => updateField("signInUrl", event.target.value)} />
               </label>
 
+              <div className="admin-fieldset">
+                <span>Available days</span>
+                <div className="admin-checkboxes">
+                  {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((label, index) => (
+                    <label key={index} className="admin-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={(settings.availableDays || []).includes(index)}
+                        onChange={(event) => {
+                          const current = settings.availableDays || [];
+                          const next = event.target.checked
+                            ? [...current, index]
+                            : current.filter((d) => d !== index);
+                          updateField("availableDays", next);
+                        }}
+                      />
+                      <span>{label}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              <div className="admin-field-row">
+                <label>
+                  <span>Start time</span>
+                  <select value={settings.timeRange?.start || "8:00 AM"} onChange={(event) => updateField("timeRange", { ...(settings.timeRange || {}), start: event.target.value })}>
+                    {["12:00 AM", "1:00 AM", "2:00 AM", "3:00 AM", "4:00 AM", "5:00 AM", "6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM"].map((t) => (
+                      <option key={t} value={t}>{t}</option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  <span>End time</span>
+                  <select value={settings.timeRange?.end || "2:00 PM"} onChange={(event) => updateField("timeRange", { ...(settings.timeRange || {}), end: event.target.value })}>
+                    {["1:00 AM", "2:00 AM", "3:00 AM", "4:00 AM", "5:00 AM", "6:00 AM", "7:00 AM", "8:00 AM", "9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM", "5:00 PM", "6:00 PM", "7:00 PM", "8:00 PM", "9:00 PM", "10:00 PM", "11:00 PM", "12:00 AM"].map((t) => (
+                      <option key={t} value={t}>{t}</option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+
               <div className="admin-actions">
                 <button className="admin-save" type="submit">Save changes</button>
                 <button className="admin-reset" type="button" onClick={resetSettings}>Reset</button>

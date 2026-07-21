@@ -23,9 +23,10 @@ export default function Page() {
   const [timezone, setTimezone] = useState("GMT / UTC");
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [linkPopupOpen, setLinkPopupOpen] = useState(false);
+  const [profileLoaded, setProfileLoaded] = useState(false);
 
   const selectedDate = dateFromKey(selectedDateKey);
-  const availableTimes = availableTimesForDate(selectedDateKey);
+  const availableTimes = availableTimesForDate(selectedDateKey, profile.availableDays, profile.timeRange);
   const bookingLink = buildBookingLink(profile.bookingEmail, profile.signInUrl);
 
   useEffect(() => {
@@ -35,11 +36,15 @@ export default function Page() {
       try {
         const supabaseProfile = await readSupabaseProfile();
         if (!cancelled) {
-          setProfile(supabaseProfile || readShareSettings() || readProfileSettings());
+          const loaded = supabaseProfile || readShareSettings() || readProfileSettings();
+          setProfile(loaded);
+          setProfileLoaded(true);
         }
       } catch {
         if (!cancelled) {
-          setProfile(readShareSettings() || readProfileSettings());
+          const loaded = readShareSettings() || readProfileSettings();
+          setProfile(loaded);
+          setProfileLoaded(true);
         }
       }
     }
@@ -51,6 +56,14 @@ export default function Page() {
       cancelled = true;
     };
   }, []);
+
+  useEffect(() => {
+    if (!profileLoaded) return;
+    const selection = getInitialBookingSelection(new Date(), profile);
+    setSelectedDateKey(selection.dateKey);
+    setVisibleMonth(new Date(selection.date.getFullYear(), selection.date.getMonth(), 1));
+    setSelectedTime("");
+  }, [profileLoaded]);
 
   useEffect(() => {
     if (!confirmOpen && !linkPopupOpen) return undefined;
@@ -116,7 +129,7 @@ export default function Page() {
           </div>
 
           <div className="availability-grid">
-            <CalendarPicker visibleMonth={visibleMonth} selectedDateKey={selectedDateKey} onMonthChange={setVisibleMonth} onToday={(month, dateKey) => {
+            <CalendarPicker visibleMonth={visibleMonth} selectedDateKey={selectedDateKey} onMonthChange={setVisibleMonth} availableDays={profile.availableDays} onToday={(month, dateKey) => {
               setVisibleMonth(month);
               chooseDate(dateFromKey(dateKey));
             }} onDateGridClick={handleDateGridClick} />
