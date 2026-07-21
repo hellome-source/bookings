@@ -26,7 +26,7 @@ export default function Page() {
 
   const selectedDate = dateFromKey(selectedDateKey);
   const availableTimes = availableTimesForDate(selectedDateKey);
-  const bookingLink = buildBookingLink(profile.bookingEmail);
+  const bookingLink = buildBookingLink(profile.bookingEmail, profile.signInUrl);
 
   useEffect(() => {
     let cancelled = false;

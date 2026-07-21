@@ -149,6 +149,11 @@ export default function AdminPage() {
                 <input value={settings.bookingEmail || ""} onChange={(event) => updateField("bookingEmail", event.target.value)} />
               </label>
 
+              <label>
+                <span>Sign-in URL</span>
+                <input placeholder="https://..." value={settings.signInUrl || ""} onChange={(event) => updateField("signInUrl", event.target.value)} />
+              </label>
+
               <div className="admin-actions">
                 <button className="admin-save" type="submit">Save changes</button>
                 <button className="admin-reset" type="button" onClick={resetSettings}>Reset</button>
